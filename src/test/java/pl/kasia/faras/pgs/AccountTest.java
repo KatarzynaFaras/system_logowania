@@ -1,53 +1,54 @@
 package pl.kasia.faras.pgs;
 
-
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import java.math.BigDecimal;
 
+import static junit.framework.TestCase.assertEquals;
+import static pl.kasia.faras.pgs.BankOperations.addAccountToBank;
+
 public class AccountTest {
 
-    private Account account1;
+    Account account;
 
     @Before
-    public void setUp() {
-
-        this.account1 = BankOperations.addAccountToBank("max", "123");
+    public void setUp() throws Exception {
+        account = new Account("jaki", "234");
+        addAccountToBank(account);
     }
 
     @Test
     public void getLogin() {
-        Assert.assertEquals(account1.getLogin(), "max");
+        assertEquals(account.getLogin(), "jaki");
     }
 
     @Test
     public void getPassword() {
-        Assert.assertEquals(account1.getPassword(), "123");
+        assertEquals(account.getPassword(), "234");
     }
 
     @Test
     public void getBalance() {
-       Assert.assertEquals(account1.getBalance(), BigDecimal.valueOf(0));
+        assertEquals(account.getBalance(), BigDecimal.ZERO);
     }
 
     @Test
-    public void remittance200WhenBalance0() {
-        account1.remittanceToAccount(BigDecimal.valueOf(200));
-        Assert.assertEquals(account1.getBalance(), BigDecimal.valueOf(200));
+    public void remittanceToAccount() {
+        account.remittanceToAccount(BigDecimal.valueOf(100));
+        assertEquals(account.getBalance(), BigDecimal.valueOf(100));
     }
 
     @Test
-    public void payOut200WhenBalance100() {
-        account1.payOutFromAccount(BigDecimal.valueOf(200));
-        Assert.assertEquals(account1.getBalance(), BigDecimal.valueOf(0));
+    public void payOutFromAccountWhenPossible() {
+        account.remittanceToAccount(BigDecimal.valueOf(100));
+        account.payOutFromAccount(BigDecimal.valueOf(100));
+        assertEquals(account.getBalance(), BigDecimal.ZERO);
     }
 
     @Test
-    public void payOut100WhenBalance100() {
-        account1.remittanceToAccount(BigDecimal.valueOf(100));
-        account1.payOutFromAccount(BigDecimal.valueOf(100));
-        Assert.assertEquals(account1.getBalance(), BigDecimal.ZERO);
+    public void payOutFromAccountWhenImpossible() {
+        account.remittanceToAccount(BigDecimal.valueOf(100));
+        account.payOutFromAccount(BigDecimal.valueOf(200));
+        Assert.assertEquals(account.getBalance(), BigDecimal.valueOf(100));
     }
 }

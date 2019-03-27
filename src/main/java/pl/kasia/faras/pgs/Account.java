@@ -1,9 +1,7 @@
 package pl.kasia.faras.pgs;
 
 import java.math.BigDecimal;
-import java.util.InputMismatchException;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class Account {
 
@@ -25,78 +23,21 @@ public class Account {
         return password;
     }
 
-    public void printBalance() {
-        System.out.println("Twoje saldo: " + this.balance);
-    }
-
     public BigDecimal getBalance() {
         return this.balance;
     }
 
-    public  void remittanceToAccount(BigDecimal remittanceValue) {
+    public void remittanceToAccount(BigDecimal remittanceValue) {
         balance = this.balance.add(remittanceValue);
         System.out.println("Twoje saldo po wpłacie: " + balance);
     }
 
     public void payOutFromAccount(BigDecimal payOutValue) {
-        if (payOutValue.doubleValue() <= this.balance.doubleValue()) {
-            this.balance = balance.subtract(payOutValue);
-            System.out.println("Twoje saldo po wypłacie: " + this.balance);
+        if (payOutValue.doubleValue() <= balance.doubleValue()) {
+            balance = balance.subtract(payOutValue);
+            System.out.println("Twoje saldo po wypłacie: " + balance);
         } else {
             System.out.println("Zbyt mało pieniędzy na koncie.");
-        }
-    }
-    public  void selectOperation() {
-        Scanner scanner = new Scanner(System.in);
-        Integer a = scanner.nextInt();
-
-        switch (a) {
-            case 1:
-                chooseRemittance();
-                break;
-            case 2:
-                choosePayOut();
-                break;
-            case 3:
-                printBalance();
-                AccountMenu.startAccountMenu();
-                selectOperation();
-                break;
-            case 4:
-                System.out.println("Wylogowano pomyślnie.");
-                BankMenu.startBankMenu();
-                BankMenu.selectOperationFromBankMenu();
-                break;
-            default:
-                System.out.println("Proszę wybrac opcję dostępną w menu.");
-                AccountMenu.startAccountMenu();
-                selectOperation();
-        }
-
-    }
-
-    public void chooseRemittance() {
-        try {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Podaj kwotę wpłaty: ");
-            remittanceToAccount(scanner.nextBigDecimal());
-            AccountMenu.startAccountMenu();
-            selectOperation();
-        } catch (InputMismatchException iMe) {
-            System.out.println("Proszę wpisać kwotę z przecinkiem zamiast kropki.");
-            chooseRemittance();
-        }
-    }
-    public  void choosePayOut() {
-        try {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Podaj kwotę do wypłacenia: ");
-            payOutFromAccount(scanner.nextBigDecimal());
-            AccountMenu.startAccountMenu();
-            selectOperation();
-        } catch (InputMismatchException iMe) {
-            System.out.println("Proszę wpisać kwotę z przecinkiem zamiast kropki");
-            choosePayOut();
         }
     }
 
@@ -116,7 +57,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account: " +
-                "login " + login;
+        return "login :" + login
+                + "password: " + password;
     }
 }
