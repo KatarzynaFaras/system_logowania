@@ -64,6 +64,7 @@ public class Account {
                 break;
             case 4:
                 System.out.println("Wylogowano pomyślnie.");
+                BankMenu.startBankMenu();
                 BankMenu.selectOperationFromBankMenu();
                 break;
             default:

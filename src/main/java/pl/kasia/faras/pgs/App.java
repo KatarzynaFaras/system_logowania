@@ -7,7 +7,7 @@ public class App {
         BankOperations.addAccountToBank("kasia", "123");
         BankOperations.addAccountToBank("edi", "edi16");
         BankOperations.addAccountToBank("czarnula123", "fafik");
-//startBankMenu
-        BankMenu.startBankMenu();
+//startBank
+        BankMenu.startBank();
     }
 }

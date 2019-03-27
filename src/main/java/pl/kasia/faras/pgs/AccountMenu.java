@@ -9,4 +9,5 @@ public class AccountMenu {
                         + "3 - Saldo." + "\n"
                         + "4 - Wyloguj." + "\n");
     }
+
 }

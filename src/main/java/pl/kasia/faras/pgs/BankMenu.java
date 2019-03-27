@@ -5,32 +5,39 @@ import java.util.Scanner;
 
 public class BankMenu {
 
-    public static void startBankMenu(){
+    public static void startBank() {
         System.out.println("Witaj w naszym banku. " + "\n");
+        startBankMenu();
         selectOperationFromBankMenu();
     }
 
-        public static void selectOperationFromBankMenu() {
-            try {
-                System.out.println("1 - Zaloguj się." + "\n"
-                        + "2 - Zarejestruj się");
-                Scanner scanner = new Scanner(System.in);
-                Integer a = scanner.nextInt();
+    public static void startBankMenu() {
 
-                switch (a) {
-                    case 1:
-                        BankOperations.logIn();
-                        break;
-                    case 2:
-                        BankOperations.registration();
-                        break;
-                    default:
-                        System.out.println("Proszę wybrac opcję dostępną w menu.");
-                        selectOperationFromBankMenu();
-                }
-            } catch (InputMismatchException ime) {
-                System.out.println("Proszę wybrac opcję dostępną w menu.");
-                selectOperationFromBankMenu();
+        System.out.println("1 - Zaloguj się." + "\n"
+                + "2 - Zarejestruj się");
+    }
+
+    public static void selectOperationFromBankMenu() {
+        try {
+            Scanner scanner = new Scanner(System.in);
+            Integer a = scanner.nextInt();
+
+            switch (a) {
+                case 1:
+                    BankOperations.logIn();
+                    break;
+                case 2:
+                    BankOperations.registration();
+                    break;
+                default:
+                    System.out.println("Proszę wybrac opcję dostępną w menu.");
+                    startBankMenu();
+                    selectOperationFromBankMenu();
             }
+        } catch (InputMismatchException ime) {
+            System.out.println("Proszę wybrac opcję dostępną w menu.");
+            startBankMenu();
+            selectOperationFromBankMenu();
         }
     }
+}

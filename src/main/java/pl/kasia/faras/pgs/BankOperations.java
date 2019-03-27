@@ -9,7 +9,7 @@ public class BankOperations {
     public static void registration() {
         String enteredLogin = enterLogin();
 
-        if (loginExists(enteredLogin)) {
+        if (accounts.contains(enteredLogin)) {
             System.out.println("Podany login już istnieje, proszę podać inny");
             registration();
         } else {
@@ -41,7 +41,7 @@ public class BankOperations {
 
 
     public static Account addAccountToBank(String login, String password) {
-        if (!loginExists(login)) {
+        if (!accounts.contains(login)) {
             Account account = new Account(login, password);
             accounts.add(account);
             return account;
@@ -56,16 +56,6 @@ public class BankOperations {
         }
         return null;
     }
-    public static boolean loginExists(String login) {
-        for (Account account : accounts) {
-            if (account.getLogin().equals(login)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
 
     public static String enterLogin() {
         Scanner scanner = new Scanner(System.in);
