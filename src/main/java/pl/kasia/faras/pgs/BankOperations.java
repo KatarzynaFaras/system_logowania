@@ -3,7 +3,7 @@ package pl.kasia.faras.pgs;
 import java.util.*;
 
 import static pl.kasia.faras.pgs.Utils.*;
-import static pl.kasia.faras.pgs.AccountMenu.selectOperation;
+import static pl.kasia.faras.pgs.AccountMenu.*;
 
 public class BankOperations {
 
@@ -22,7 +22,7 @@ public class BankOperations {
             addAccountToBank(account);
             System.out.println("Rejestracja konta przebiegła pomyślnie.");
             System.out.println("Witaj " + enteredLogin + "! \n");
-            AccountMenu.startAccountMenu();
+            startAccountMenu();
             selectOperation(account);
         }
     }
@@ -37,7 +37,7 @@ public class BankOperations {
         } else {
             System.out.println("Zalogowano pomyślnie.");
             System.out.println("Witaj " + login + "! \n");
-            AccountMenu.startAccountMenu();
+            startAccountMenu();
             selectOperation(account);
         }
         return account;
